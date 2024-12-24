@@ -19,7 +19,8 @@ export const getBigAttacks = async (req: Request, res: Response) => {
 
 export const getErea = async (req: Request, res: Response) => {
     try {
-      const { groupByErea } = req.body;
+      const { groupByErea } = req.params;
+      console.log(`${groupByErea}`); 
       if (!groupByErea) {
         res.status(400).json({ message: "שם האיזור לא חוקי" });
         return;

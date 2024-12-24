@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -13,13 +13,25 @@ import {
   Home as HomeIcon,
   AccountCircle as AccountCircleIcon,
 } from "@mui/icons-material";
+import SideMenu from "../sideMenu/SideMenu";
+import { useNavigate } from "react-router-dom";
 
 interface MainLayoutProps {
   children: React.ReactNode;
 }
 
 const Layout: React.FC<MainLayoutProps> = ({ children }) => {
+  const navigate = useNavigate();
   const theme = useTheme();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleMenuToggle = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const toHome = () => {
+    navigate("/home");
+  }
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
@@ -42,6 +54,7 @@ const Layout: React.FC<MainLayoutProps> = ({ children }) => {
               edge="start"
               color="inherit"
               aria-label="menu"
+              onClick={handleMenuToggle}
               sx={{
                 ml: 2,
                 color: "white",
@@ -64,6 +77,7 @@ const Layout: React.FC<MainLayoutProps> = ({ children }) => {
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <IconButton
                 color="inherit"
+                onClick={toHome}
                 sx={{ color: "white" }}
               >
                 <HomeIcon />
@@ -82,6 +96,7 @@ const Layout: React.FC<MainLayoutProps> = ({ children }) => {
           </Toolbar>
         </Container>
       </AppBar>
+      <SideMenu open={menuOpen} onClose={handleMenuToggle} />
       <Container
         maxWidth="lg"
         component="main"
