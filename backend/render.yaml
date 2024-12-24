@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: global-terrorism
+    env: node
+    plan: free
+    region: oregon
+    buildCommand: "npm install"
+    startCommand: "npm run"
+    autoDeploy: true
+    envVars:
+      - key: MONGO_URI
+        value: "mongodb+srv://evyatar6133:orEhJy13h7b8rR1v@cluster0.41agx.mongodb.net/GlobalTerrorism"
